@@ -45,8 +45,8 @@ task analyzes: :environment do
   log "Target acquired: McKaig Chevrolet Buick - A Dealer For The People ", :warn
 
   log "Getting reviews... "
-  reviews = Services::GetScrapeReviews.new
-  log  "Done.\n", :ok
+  reviews = Services::GetScrapeReviews.new.call
+  log  "Done. Found #{reviews.size} reviews \n", :ok
 
   log "Initializing analyzes... "
   Services::RateReviews.new(reviews)
