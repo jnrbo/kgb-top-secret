@@ -20,8 +20,19 @@ module Services
 
     def get_reviews_from_page(page)
       page = Services::HtmlService.new(url(page))
-      reviews = page.search(".review-entry .review-content")
-      reviews
+      entries = page.element(".review-entry")
+
+      entries.map do |entry|
+        {
+          review: page.value(entry, ".review-content"),
+          user: page.value(entry, ".margin-bottom-sm span.italic.font-18").gsub!("- ", ''),
+        }
+      end
+    end
+
+
+    def build_object(reviews, users)
+
     end
 
 

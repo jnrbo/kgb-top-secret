@@ -9,11 +9,16 @@ module Services
     def initialize(url)
       body = request(url).body
       @page = Nokogiri::HTML.parse(body)
+      @page
     end
 
 
-    def search(query)
-     @page.css(query).map(&:text)
+    def value(element, query)
+      element.css(query).text
+    end
+
+    def element(query)
+      @page.css(query)
     end
 
     private
@@ -26,7 +31,7 @@ module Services
         'User-Agent': 'KGB/37.26.8'
       }
 
-      request = Net::HTTP::Post.new(uri.request_uri, headers)
+      request = Net::HTTP::Get.new(uri.request_uri, headers)
 
       http.request(request)
     end

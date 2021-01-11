@@ -37,6 +37,9 @@ def info
   log "\n..................................\n", :warn
 end
 
+def ip
+  Array.new(4){rand(256)}.join('.')
+end
 
 desc 'Analyzes the first five pages'
 task analyzes: :environment do
@@ -46,11 +49,19 @@ task analyzes: :environment do
 
   log "Getting reviews... "
   reviews = Services::GetScrapeReviews.new.call
-  log  "Done. Found #{reviews.size} reviews \n", :ok
+  log "Done. Found #{reviews.size} reviews \n", :ok
 
-  log "Initializing analyzes... "
-  Services::RateReviews.new(reviews)
-  log  "Done.\n", :ok
+  log "Initializing analyzes and calculating score... "
+  service = Services::RateReviews.new
+  top3 = service.get_top_reviews(reviews)
+  # puts service.get_top_reviews(["amazing great seller extremely extremely", "best seller ever", "extremely super great", "random"])
+
+  top3.each do |rev|
+    puts "User: #{rev[:user]} (#{ip})"
+    puts "Review: #{rev[:review]}\n\n"
+  end
+
+  log "Done.\n", :ok
 
   log "\n..................................\n", :warn
 end
