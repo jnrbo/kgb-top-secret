@@ -3,7 +3,9 @@ module Services
     def initialize
       @words = {
         :very => 0.2,
+        :want => 0.2,
         :great => 0.3,
+        :really => 0.3,
         :highly => 0.4,
         :best => 0.4,
         :awesome => 0.5,
@@ -40,7 +42,7 @@ module Services
       @words.each do |word|
         score += get_rate(text, word)
       end
-      score * Math.sqrt(text.length)
+      score * Math.sqrt(text.length * 0.1)
     end
   end
 end

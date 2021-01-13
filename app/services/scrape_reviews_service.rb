@@ -6,7 +6,7 @@ require 'json'
 module Services
   class GetScrapeReviews
 
-    MAX_PAGES = 5
+    MAX_PAGES = 7
 
     def call
       reviews = []
@@ -30,15 +30,16 @@ module Services
       end
     end
 
-
-    def build_object(reviews, users)
-
+    def show_ranking(reviews)
+      reviews.each do |rev|
+        puts "User: #{rev[:user]} (#{ip})"
+        puts "Rate: #{rev[:rate]}"
+        puts "Review: #{rev[:review]}\n\n"
+      end
     end
 
-
     def url(page)
-      # "https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-review-23685/"
-      "https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page#{page}/?filter=#link"
+      "https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page#{page}/?filter=ONLY_POSITIVE&__optvLead=3#link"
     end
 
   end

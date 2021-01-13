@@ -26,7 +26,7 @@ def info
   sleep 0.5
   log "Done. \n", :ok
 
-  log "Installing FBI Plug-in.."
+  log "Installing CIA Plug-in.."
   sleep 0.3
   log "Done. \n", :ok
 
@@ -48,18 +48,16 @@ task analyzes: :environment do
   log "Target acquired: McKaig Chevrolet Buick - A Dealer For The People ", :warn
 
   log "Getting reviews... "
-  reviews = Services::GetScrapeReviews.new.call
+  get_scrape_reviews_service = Services::GetScrapeReviews.new
+  reviews = get_scrape_reviews_service.call
   log "Done. Found #{reviews.size} reviews \n", :ok
 
   log "Initializing analyzes and calculating score... "
-  service = Services::RateReviews.new
-  top3 = service.get_top_reviews(reviews)
+  rate_reviews_service = Services::RateReviews.new
+  top3 = rate_reviews_service.get_top_reviews(reviews)
   # puts service.get_top_reviews(["amazing great seller extremely extremely", "best seller ever", "extremely super great", "random"])
 
-  top3.each do |rev|
-    puts "User: #{rev[:user]} (#{ip})"
-    puts "Review: #{rev[:review]}\n\n"
-  end
+  get_scrape_reviews_service.show_ranking(top3)
 
   log "Done.\n", :ok
 
