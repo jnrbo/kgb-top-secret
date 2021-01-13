@@ -24,12 +24,13 @@ module Services
           rate: calculate_rate(review[:review])
         }
       end
-      sorted = top_reviews.sort_by! { |v| -v[:rate] }
-      top3 = sorted[0..2]
-      top3
+      sort_and_slice(top_reviews)
     end
 
-    private
+    def sort_and_slice(top_reviews)
+      sorted = top_reviews.sort_by! { |v| -v[:rate] }
+      sorted[0..2]
+    end
 
     def get_rate(text, word)
       key, weight = word
@@ -42,7 +43,7 @@ module Services
       @words.each do |word|
         score += get_rate(text, word)
       end
-      score * Math.sqrt(text.length * 0.1)
+      (score * Math.sqrt(text.length * 0.1)).round(4)
     end
   end
 end
