@@ -35,8 +35,8 @@ module Services
 
     def show_ranking(reviews)
       reviews.each do |rev|
-        puts "User: #{rev[:user]} (#{ip})"
-        puts "Rate: #{rev[:rate]}"
+        puts "User: #{rev[:user]} (IP: #{ip})"
+        puts "Score: #{rev[:rate]}"
         puts "Review: #{rev[:review]}\n\n"
       end
     end
