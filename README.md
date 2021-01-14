@@ -12,18 +12,20 @@ Requirements
 Install
 ------------
 
-To install all dependencies necessary to run the project, run:
+To install all dependencies necessary to run the project, execute:
 
 ```shell script
 bundle install
 ```
 
-Running Scraper
+
+Running the Scraper
 ------------
 
 ```shell script
 rake analyzes
 ```
+
 
 Running Tests
 ------------
@@ -34,10 +36,11 @@ rspec
 
 To open coverage just type `open coverage/index.html` 
 
+
 Overly Positive criteria
 ------------
 To identify the most overly positive reviews, a score it's calculated based on how long is the review along with how many "overly positive" words it has.
-Each word have a weight that influence in the score.
+Each word has a weight that influences the score.
 
 Equation:
 
@@ -45,7 +48,7 @@ Equation:
 
 ```text
 x = score
-n = number of occurrences that the given word was found in text
+n = number of occurrences of the word in text
 w = weight
 l = text length
 ```
