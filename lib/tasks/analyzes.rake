@@ -38,7 +38,7 @@ def info
 end
 
 def ip
-  Array.new(4){rand(256)}.join('.')
+  Array.new(4) { rand(256) }.join('.')
 end
 
 desc 'Analyzes the first five pages'
@@ -48,14 +48,13 @@ task analyzes: :environment do
   log "Target acquired: McKaig Chevrolet Buick - A Dealer For The People ", :warn
 
   log "Getting reviews... "
-  get_scrape_reviews_service = Services::GetScrapeReviews.new
+  get_scrape_reviews_service = Services::ScrapeReviews.new
   reviews = get_scrape_reviews_service.call
   log "Done. Found #{reviews.size} reviews \n", :ok
 
   log "Initializing analyzes and calculating score... "
   rate_reviews_service = Services::RateReviews.new
   top3 = rate_reviews_service.get_top_reviews(reviews)
-  # puts service.get_top_reviews(["amazing great seller extremely extremely", "best seller ever", "extremely super great", "random"])
 
   get_scrape_reviews_service.show_ranking(top3)
 

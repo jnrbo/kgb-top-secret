@@ -11,6 +11,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'simplecov', require: false
+  gem 'webmock'
+  gem 'vcr', '~> 6.0.0'
 end
 
 group :development do

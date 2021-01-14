@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 module Services
   class RateReviews
-    def initialize
-      @words = {
-        :very => 0.2,
-        :want => 0.2,
-        :great => 0.3,
-        :really => 0.3,
-        :highly => 0.4,
-        :best => 0.4,
-        :awesome => 0.5,
-        :amazing => 0.5,
-        :super => 0.6,
-        :extremely => 0.6,
+    def words
+      {
+        very: 0.2,
+        want: 0.2,
+        great: 0.3,
+        really: 0.3,
+        highly: 0.4,
+        best: 0.4,
+        awesome: 0.5,
+        amazing: 0.5,
+        super: 0.6,
+        extremely: 0.6
       }
     end
 
@@ -40,7 +42,7 @@ module Services
 
     def calculate_rate(text)
       score = 0.0
-      @words.each do |word|
+      words.each do |word|
         score += get_rate(text, word)
       end
       (score * Math.sqrt(text.length * 0.1)).round(4)

@@ -54,6 +54,26 @@ describe Services::RateReviews do
     end
   end
 
+  describe '#words' do
+    context 'with no parameter' do
+      it 'return all words and weights' do
+        words = subject.words
+        expect(words.length).to eq 10
+
+        expect(words[:very]).to eq 0.2
+        expect(words[:want]).to eq 0.2
+        expect(words[:great]).to eq 0.3
+        expect(words[:really]).to eq 0.3
+        expect(words[:highly]).to eq 0.4
+        expect(words[:best]).to eq 0.4
+        expect(words[:awesome]).to eq 0.5
+        expect(words[:amazing]).to eq 0.5
+        expect(words[:super]).to eq 0.6
+        expect(words[:extremely]).to eq 0.6
+      end
+    end
+  end
+
   describe '#calculate_rate' do
     context 'with required parameters' do
       it 'calculate rate of review1' do

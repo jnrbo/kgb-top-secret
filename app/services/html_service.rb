@@ -1,17 +1,16 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 require 'json'
 
 module Services
-  class HtmlService
-    @page
-
+  class Html
     def initialize(url)
       body = request(url).body
       @page = Nokogiri::HTML.parse(body)
       @page
     end
-
 
     def value(element, query)
       element.css(query).text
@@ -35,6 +34,5 @@ module Services
 
       http.request(request)
     end
-
   end
 end
