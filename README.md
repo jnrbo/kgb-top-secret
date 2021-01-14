@@ -1,24 +1,51 @@
-# README
+# A Dealer For the People
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a secret project from KGB to analyze reviews from McKaig Chevrolet Buick - A Dealer For The People
 
-Things you may want to cover:
 
-* Ruby version
+Requirements
+------------
 
-* System dependencies
+- Ruby 2.7.0
+- Bundler 2.1.2
 
-* Configuration
+Install
+------------
 
-* Database creation
+To install all dependencies necessary to run the project, run:
 
-* Database initialization
+```shell script
+bundle install
+```
 
-* How to run the test suite
+Running Scraper
+------------
 
-* Services (job queues, cache servers, search engines, etc.)
+```shell script
+rake analyzes
+```
 
-* Deployment instructions
+Running Tests
+------------
 
-* ...
+```shell script
+rspec
+```
+
+To open coverage just type `open coverage/index.html` 
+
+Overly Positive criteria
+------------
+To identify the most overly positive reviews, a score it's calculated based on how long is the review along with how many "overly positive" words it has.
+Each word have a weight that influence in the score.
+
+Equation:
+
+![equation](equation.png)
+
+```text
+x = score
+n = number of occurrences that the given word was found in text
+w = weight
+l = text length
+```
