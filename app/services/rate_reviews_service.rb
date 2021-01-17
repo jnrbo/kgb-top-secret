@@ -36,15 +36,20 @@ module Services
 
     def get_rate(text, word)
       key, weight = word
-      r = /\b#{key}\b/i
+      r = /(?=#{key})/
       text.scan(r).count * weight
     end
 
     def calculate_rate(text)
+      low_text = text.downcase
       score = 0.0
       words.each do |word|
-        score += get_rate(text, word)
+        score += get_rate(low_text, word)
       end
+
+      puts score
+      puts text.length
+      puts "-------"
       (score * Math.sqrt(text.length * 0.1)).round(4)
     end
   end
