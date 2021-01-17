@@ -56,6 +56,8 @@ task analyzes: :environment do
   rate_reviews_service = Services::RateReviews.new
   top3 = rate_reviews_service.get_top_reviews(reviews)
 
+  log "TOP 3 REVIEWS:\n"
+
   get_scrape_reviews_service.show_ranking(top3)
 
   log "Done.\n", :ok
