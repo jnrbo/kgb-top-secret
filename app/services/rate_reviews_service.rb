@@ -47,9 +47,6 @@ module Services
         score += get_rate(low_text, word)
       end
 
-      puts score
-      puts text.length
-      puts "-------"
       (score * Math.sqrt(text.length * 0.1)).round(4)
     end
   end
